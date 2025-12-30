@@ -7,9 +7,7 @@ A antigravity world feature
 
 ```json
 "features": {
-    "ghcr.io/iiharu/features/antigravity:0": {
-        "version": "latest"
-    }
+    "ghcr.io/iiharu/features/antigravity:0": {}
 }
 ```
 
@@ -20,6 +18,7 @@ A antigravity world feature
 
 
 
+
 ---
 
-_Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/iiharu/feature-starter/blob/main/src/antigravity/devcontainer-feature.json).  Add additional notes to a `NOTES.md`._
+_Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/iiharu/features/blob/main/src/antigravity/devcontainer-feature.json).  Add additional notes to a `NOTES.md`._
