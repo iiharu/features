@@ -1,0 +1,22 @@
+{
+    "name": "Antigravity",
+    "id": "antigravity",
+    "version": "0.0.1",
+    "description": "A antigravity world feature",
+    "options": {},
+    "installsAfter": [
+        "ghcr.io/devcontainers/features/common-utils"
+    ],
+    "mounts": [
+        {
+            "source": "${localEnv:HOME}/.gitconfig",
+            "target": "/home/vscode/.gitconfig",
+            "type": "bind"
+        },
+        {
+            "source": "${localEnv:HOME}/.gemini/GEMINI.md",
+            "target": "/home/vscode/.gemini/GEMINI.md",
+            "type": "bind"
+        }
+    ]
+}
