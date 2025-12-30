@@ -1,7 +1,7 @@
 {
     "name": "Antigravity",
     "id": "antigravity",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "A antigravity world feature",
     "options": {},
     "installsAfter": [
@@ -14,8 +14,8 @@
             "type": "bind"
         },
         {
-            "source": "${localEnv:HOME}/.gemini/GEMINI.md",
-            "target": "/home/vscode/.gemini/GEMINI.md",
+            "source": "${localEnv:HOME}/.gemini",
+            "target": "/home/vscode/.gemini",
             "type": "bind"
         }
     ]
