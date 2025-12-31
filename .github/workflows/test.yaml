@@ -13,8 +13,6 @@ jobs:
     strategy:
       matrix:
         features:
-          - color
-          - hello
           # TODO: docker: Error response from daemon: invalid mount config for type "bind": bind source path does not exist: /home/node/.gemini
           # - antigravity
         baseImage:
@@ -36,8 +34,6 @@ jobs:
     strategy:
       matrix:
         features:
-          - color
-          - hello
           # TODO: docker: Error response from daemon: invalid mount config for type "bind": bind source path does not exist: /home/node/.gemini
           # - antigravity
     steps:
