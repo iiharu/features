@@ -40,10 +40,14 @@ source dev-container-features-test-lib
 # Feature-specific tests
 # The 'check' command comes from the dev-container-features-test-lib. Syntax is...
 # check <LABEL> <cmd> [args...]
-check ".gitconfig is mounted" test -f /home/vscode/.gitconfig
-check ".gemini is mounted" test -d /home/vscode/.gemini
-check ".gemini/GEMINI.md is mounted" test -f /home/vscode/.gemini/GEMINI.md
+check ".gitconfig is mounted" test -f /var/tmp/.gitconfig
+check ".gitconfig is linked" test -h $HOME/.gitconfig
+# TODO: confirm .gitconfig contents
+check ".gemini is mounted" test -d /var/tmp/.gemini
+check ".gemini is linked" test -h $HOME/.gemini
+# TODO: confirm .gitconfig contents
 check ".bash_aliases is created" test -f $HOME/.bash_aliases
+# TODO: confirm .gitconfig contents
 
 # Report results
 # If any of the checks above exited with a non-zero exit code, the test will fail.

@@ -12,3 +12,8 @@ alias code='command antigravity'
 EOF
 
 chown -R ${_REMOTE_USER}:${_REMOTE_USER} "${_REMOTE_USER_HOME}/.bash_aliases"
+
+ln -s /var/tmp/.gitconfig "${_REMOTE_USER_HOME}/.gitconfig"
+chown -h ${_REMOTE_USER}:${_REMOTE_USER} "${_REMOTE_USER_HOME}/.gitconfig"
+ln -s /var/tmp/.gemini "${_REMOTE_USER_HOME}/.gemini"
+chown -h ${_REMOTE_USER}:${_REMOTE_USER} "${_REMOTE_USER_HOME}/.gemini"
