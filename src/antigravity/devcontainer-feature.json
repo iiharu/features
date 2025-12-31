@@ -8,6 +8,7 @@
         "ghcr.io/devcontainers/features/common-utils"
     ],
     "mounts": [
+        // NOTE: `docker --mount` is not compatible with `${remoteEnv:HOME}` or `${containerEnv:HOME}`
         {
             "source": "${localEnv:HOME}/.gitconfig",
             "target": "/home/vscode/.gitconfig",
