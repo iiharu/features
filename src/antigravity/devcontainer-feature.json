@@ -1,11 +1,16 @@
 {
     "name": "Antigravity",
     "id": "antigravity",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "description": "A antigravity world feature",
     "options": {},
+    "dependsOn": {
+        "ghcr.io/devcontainers/features/common-utils:2": {
+            "installZsh": true,
+            "installOhMyZsh": true
+        }
+    },
     "installsAfter": [
-        // NOTE: override `/usr/local/bin/code` redirects `antigravity`
         "ghcr.io/devcontainers/features/common-utils"
     ],
     "mounts": [
