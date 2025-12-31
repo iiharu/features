@@ -23,7 +23,7 @@
 # 
 # This test can be run with the following command:
 #
-#    HOME=$(pwd)/test/antigravity/fixtures/home devcontainer features test \
+#    HOME=$(pwd)/test/antigravity/fixtures devcontainer features test \
 #                   --features antigravity \
 #                   --remote-user root \
 #                   --skip-scenarios   \
