@@ -7,10 +7,10 @@ if [ "$(id -u)" -ne 0 ]; then
     exit 1
 fi
 
-FEATURE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+ZSH_CUSTOM="${_REMOTE_USER_HOME}/.oh-my-zsh/custom"
 
-# override shim, it redirects to antigravity
-cp -f "${FEATURE_DIR}/bin/code" /usr/local/bin/
-chmod +rx /usr/local/bin/code
+cat << 'EOF' > "${ZSH_CUSTOM}/antigravity.zsh"
+alias code='command antigravity'
+EOF
 
-exit $?
+chown -R ${_REMOTE_USER}:${_REMOTE_USER} "${ZSH_CUSTOM}/antigravity.zsh"
