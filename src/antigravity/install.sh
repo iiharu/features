@@ -7,10 +7,8 @@ if [ "$(id -u)" -ne 0 ]; then
     exit 1
 fi
 
-ZSH_CUSTOM="${_REMOTE_USER_HOME}/.oh-my-zsh/custom"
-
-cat << 'EOF' > "${ZSH_CUSTOM}/antigravity.zsh"
+cat << 'EOF' > "${_REMOTE_USER_HOME}/.bash_aliases"
 alias code='command antigravity'
 EOF
 
-chown -R ${_REMOTE_USER}:${_REMOTE_USER} "${ZSH_CUSTOM}/antigravity.zsh"
+chown -R ${_REMOTE_USER}:${_REMOTE_USER} "${_REMOTE_USER_HOME}/.bash_aliases"

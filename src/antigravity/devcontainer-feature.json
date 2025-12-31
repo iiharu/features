@@ -4,12 +4,6 @@
     "version": "0.0.5",
     "description": "A antigravity world feature",
     "options": {},
-    "dependsOn": {
-        "ghcr.io/devcontainers/features/common-utils:2": {
-            "installZsh": true,
-            "installOhMyZsh": true
-        }
-    },
     "installsAfter": [
         "ghcr.io/devcontainers/features/common-utils"
     ],
