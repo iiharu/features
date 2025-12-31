@@ -1,10 +1,11 @@
 {
     "name": "Antigravity",
     "id": "antigravity",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "description": "A antigravity world feature",
     "options": {},
     "installsAfter": [
+        // NOTE: override `/usr/local/bin/code` redirects `antigravity`
         "ghcr.io/devcontainers/features/common-utils"
     ],
     "mounts": [
