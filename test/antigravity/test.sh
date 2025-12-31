@@ -43,7 +43,7 @@ source dev-container-features-test-lib
 check ".gitconfig is mounted" test -f /home/vscode/.gitconfig
 check ".gemini is mounted" test -d /home/vscode/.gemini
 check ".gemini/GEMINI.md is mounted" test -f /home/vscode/.gemini/GEMINI.md
-check ".bash_aliases is created" test -f /root/.bash_aliases
+check ".bash_aliases is created" test -f $HOME/.bash_aliases
 
 # Report results
 # If any of the checks above exited with a non-zero exit code, the test will fail.
