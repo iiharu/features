@@ -26,7 +26,7 @@
 #    HOME=$(pwd)/test/antigravity/fixtures devcontainer features test \
 #                   --features antigravity \
 #                   --remote-user root \
-#                   --skip-scenarios   \
+#                   --skip-scenarios \
 #                   --base-image mcr.microsoft.com/devcontainers/base:ubuntu \
 #                   /path/to/this/repo
 
@@ -41,13 +41,12 @@ source dev-container-features-test-lib
 # The 'check' command comes from the dev-container-features-test-lib. Syntax is...
 # check <LABEL> <cmd> [args...]
 check ".gitconfig is mounted" test -f /var/tmp/.gitconfig
-check ".gitconfig is linked" test -h $HOME/.gitconfig
-# TODO: confirm .gitconfig contents
+check ".gitconfig is link" test -h $HOME/.gitconfig
+check ".gitconfig is linked" test "$(readlink $HOME/.gitconfig)" == "/var/tmp/.gitconfig"
 check ".gemini is mounted" test -d /var/tmp/.gemini
 check ".gemini is linked" test -h $HOME/.gemini
-# TODO: confirm .gitconfig contents
+check ".gitconfig is linked" test "$(readlink $HOME/.gemini)" == "/var/tmp/.gemini"
 check ".bash_aliases is created" test -f $HOME/.bash_aliases
-# TODO: confirm .gitconfig contents
 
 # Report results
 # If any of the checks above exited with a non-zero exit code, the test will fail.
