@@ -9,9 +9,7 @@ fi
 
 # Antigravity's devcontainer doesn't provide `code` binary.
 cat << 'EOF' > "${_REMOTE_USER_HOME}/.bash_aliases"
-if ! command -v code &> /dev/null; then
-    alias code='command antigravity'
-fi
+alias code='command antigravity'
 EOF
 chown -R ${_REMOTE_USER}:${_REMOTE_USER} "${_REMOTE_USER_HOME}/.bash_aliases"
 
@@ -43,6 +41,9 @@ ln -sf /usr/local/lib/nodejs/bin/npx /usr/local/bin/npx
 
 node -v || { echo "Error: Node.js installation failed"; exit 1; }
 npm -v || { echo "Error: npm installation failed"; exit 1; }
+
+# Upgrade npm to >= 11.10 to support --min-release-age flag correctly.
+npm install -g npm@latest
 
 # Enforce an artificial delay (--min-release-age) to mitigate supply-chain attacks via compromised rapid updates.
 npm install -g @google/gemini-cli --min-release-age=7

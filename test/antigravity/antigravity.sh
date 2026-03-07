@@ -12,6 +12,8 @@ source dev-container-features-test-lib
 # The 'check' command comes from the dev-container-features-test-lib.
 check "node-exists" node -v
 check "npm-exists" npm -v
+# Ensure npm version is >= 11.10.0
+check "npm-version-sufficient" [ "$(printf '%s\n' "11.10.0" "$(npm -v)" | sort -V | head -n1)" = "11.10.0" ]
 check "gemini-exists" gemini --version
 check "gemini-executable" command -v gemini
 

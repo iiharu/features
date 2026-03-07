@@ -18,5 +18,12 @@
             "target": "/var/tmp/.gemini",
             "type": "bind"
         }
-    ]
+    ],
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "Google.gemini-cli-vscode-ide-companion"
+            ]
+        }
+    }
 }
