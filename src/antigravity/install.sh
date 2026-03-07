@@ -7,13 +7,46 @@ if [ "$(id -u)" -ne 0 ]; then
     exit 1
 fi
 
+# Antigravity's devcontainer doesn't provide `code` binary.
 cat << 'EOF' > "${_REMOTE_USER_HOME}/.bash_aliases"
-alias code='command antigravity'
+if ! command -v code &> /dev/null; then
+    alias code='command antigravity'
+fi
 EOF
-
 chown -R ${_REMOTE_USER}:${_REMOTE_USER} "${_REMOTE_USER_HOME}/.bash_aliases"
 
-ln -s /var/tmp/.gitconfig "${_REMOTE_USER_HOME}/.gitconfig"
-chown -h ${_REMOTE_USER}:${_REMOTE_USER} "${_REMOTE_USER_HOME}/.gitconfig"
-ln -s /var/tmp/.gemini "${_REMOTE_USER_HOME}/.gemini"
-chown -h ${_REMOTE_USER}:${_REMOTE_USER} "${_REMOTE_USER_HOME}/.gemini"
+for f in .gitconfig .gemini; do
+    ln -s "/var/tmp/$f" "${_REMOTE_USER_HOME}/$f"
+    chown -h ${_REMOTE_USER}:${_REMOTE_USER} "${_REMOTE_USER_HOME}/$f"
+done
+
+# Fetch the latest Node.js LTS version dynamically to ensure we always install an up-to-date and supported runtime.
+TARGET_NODE_VER=$(curl -s https://nodejs.org/dist/index.json | jq -r '[.[] | select(.lts != false)] | .[0].version')
+if [ -z "$TARGET_NODE_VER" ]; then
+    echo "Error: Failed to fetch the latest Node.js LTS version."
+    exit 1
+fi
+
+ARCH=$(uname -m)
+if [ "$ARCH" = "x86_64" ]; then ARCH="x64"; elif [ "$ARCH" = "aarch64" ]; then ARCH="arm64"; fi
+
+NODE_TAR="node-${TARGET_NODE_VER}-linux-${ARCH}.tar.xz"
+
+# Prevent conflicts with the base OS environment.
+mkdir -p /usr/local/lib/nodejs
+curl -fsSL --compressed "https://nodejs.org/dist/${TARGET_NODE_VER}/${NODE_TAR}" | tar -xJ -C /usr/local/lib/nodejs --strip-components=1
+
+# Expose Node.js binaries globally.
+for bin in /usr/local/lib/nodejs/bin/*; do
+    if [ -x "$bin" ]; then
+        ln -sf "$bin" "/usr/local/bin/$(basename "$bin")"
+    fi
+done
+
+node -v || { echo "Error: Node.js installation failed"; exit 1; }
+npm -v || { echo "Error: npm installation failed"; exit 1; }
+
+# Enforce an artificial delay (--min-release-age) to mitigate supply-chain attacks via compromised rapid updates.
+npm install -g @google/gemini-cli --min-release-age=7
+
+gemini --version || echo "Warning: gemini command might only be available in the final container session."

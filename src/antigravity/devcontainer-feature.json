@@ -1,8 +1,8 @@
 {
     "name": "Antigravity",
     "id": "antigravity",
-    "version": "0.0.7",
-    "description": "A antigravity world feature",
+    "version": "0.0.8",
+    "description": "My antigravity devcontainer feature",
     "options": {},
     "installsAfter": [
         "ghcr.io/devcontainers/features/common-utils"
