@@ -36,17 +36,18 @@ NODE_TAR="node-${TARGET_NODE_VER}-linux-${ARCH}.tar.xz"
 mkdir -p /usr/local/lib/nodejs
 curl -fsSL --compressed "https://nodejs.org/dist/${TARGET_NODE_VER}/${NODE_TAR}" | tar -xJ -C /usr/local/lib/nodejs --strip-components=1
 
-# Expose Node.js binaries globally.
-for bin in /usr/local/lib/nodejs/bin/*; do
-    if [ -x "$bin" ]; then
-        ln -sf "$bin" "/usr/local/bin/$(basename "$bin")"
-    fi
-done
+# Expose Node.js and its package manager locally within the script's path and globally for the OS.
+ln -sf /usr/local/lib/nodejs/bin/node /usr/local/bin/node
+ln -sf /usr/local/lib/nodejs/bin/npm /usr/local/bin/npm
+ln -sf /usr/local/lib/nodejs/bin/npx /usr/local/bin/npx
 
 node -v || { echo "Error: Node.js installation failed"; exit 1; }
 npm -v || { echo "Error: npm installation failed"; exit 1; }
 
 # Enforce an artificial delay (--min-release-age) to mitigate supply-chain attacks via compromised rapid updates.
 npm install -g @google/gemini-cli --min-release-age=7
+
+# Expose the installed Gemini CLI globally.
+ln -sf /usr/local/lib/nodejs/bin/gemini /usr/local/bin/gemini
 
 gemini --version || echo "Warning: gemini command might only be available in the final container session."
