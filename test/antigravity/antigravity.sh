@@ -10,6 +10,10 @@ source dev-container-features-test-lib
 
 # Feature-specific tests
 # The 'check' command comes from the dev-container-features-test-lib.
+check "node-exists" node -v
+check "npm-exists" npm -v
+check "gemini-exists" gemini --version
+check "gemini-executable" command -v gemini
 
 # Report results
 # If any of the checks above exited with a non-zero exit code, the test will fail.

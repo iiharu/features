@@ -48,6 +48,13 @@ check ".gemini is linked" test -h $HOME/.gemini
 check ".gitconfig is linked" test "$(readlink $HOME/.gemini)" == "/var/tmp/.gemini"
 check ".bash_aliases is created" test -f $HOME/.bash_aliases
 
+# Node.js and Gemini CLI tests
+check "node is available" node -v
+check "npm is available" npm -v
+check "npx is available" npx -v
+check "gemini is available" gemini --version
+check "gemini is in path" command -v gemini
+
 # Report results
 # If any of the checks above exited with a non-zero exit code, the test will fail.
 reportResults
