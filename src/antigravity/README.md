@@ -1,7 +1,7 @@
 
 # Antigravity (antigravity)
 
-A antigravity world feature
+My antigravity devcontainer feature
 
 ## Example Usage
 
@@ -16,6 +16,12 @@ A antigravity world feature
 | Options Id | Description | Type | Default Value |
 |-----|-----|-----|-----|
 
+
+## Customizations
+
+### VS Code Extensions
+
+- `Google.gemini-cli-vscode-ide-companion`
 
 
 
