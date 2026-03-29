@@ -1,7 +1,7 @@
 
 # Antigravity (antigravity)
 
-My antigravity devcontainer feature
+This feature provides functionality missing from the `Antigravity Remote - Dev Containers` Extension.
 
 ## Example Usage
 
@@ -15,14 +15,6 @@ My antigravity devcontainer feature
 
 | Options Id | Description | Type | Default Value |
 |-----|-----|-----|-----|
-
-
-## Customizations
-
-### VS Code Extensions
-
-- `Google.gemini-cli-vscode-ide-companion`
-
 
 
 ---
