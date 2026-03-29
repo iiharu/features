@@ -1,7 +1,7 @@
 {
     "name": "Antigravity",
     "id": "antigravity",
-    "version": "0.0.9",
+    "version": "0.0.10",
     "description": "My antigravity devcontainer feature",
     "options": {},
     "installsAfter": [
@@ -12,18 +12,6 @@
             "source": "${localEnv:HOME}/.gitconfig",
             "target": "/var/tmp/.gitconfig",
             "type": "bind"
-        },
-        {
-            "source": "${localEnv:HOME}/.gemini",
-            "target": "/var/tmp/.gemini",
-            "type": "bind"
         }
-    ],
-    "customizations": {
-        "vscode": {
-            "extensions": [
-                "Google.gemini-cli-vscode-ide-companion"
-            ]
-        }
-    }
+    ]
 }

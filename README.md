@@ -2,6 +2,19 @@
 
 ## Contents
 
+### `gemini`
+
+Install Gemini CLI and configure its environment.
+
+```jsonc
+{
+    "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+    "features": {
+        "ghcr.io/iiharu/features/gemini:0": {}
+    }
+}
+```
+
 ### `antigravity`
 
 This feature provides functionality missing from the `Antigravity Remote - Dev Containers` Extension.
@@ -10,7 +23,7 @@ This feature provides functionality missing from the `Antigravity Remote - Dev C
 {
     "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
     "features": {
-        "ghcr.io/iiharu/antigravity:0": {}
+        "ghcr.io/iiharu/features/antigravity:0": {}
     }
 }
 ```
@@ -56,6 +69,7 @@ This repo contains a **GitHub Action** [workflow](.github/workflows/release.yaml
 By default, each Feature will be prefixed with the `<owner/<repo>` namespace.  For example, the two Features in this repository can be referenced in a `devcontainer.json` with:
 
 ```
+ghcr.io/iiharu/features/gemini:0
 ghcr.io/iiharu/features/antigravity:0
 ```
 

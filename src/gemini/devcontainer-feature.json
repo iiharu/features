@@ -1,0 +1,24 @@
+{
+    "name": "Gemini",
+    "id": "gemini",
+    "version": "0.0.1",
+    "description": "Install Gemini CLI and configure its environment",
+    "options": {},
+    "installsAfter": [
+        "ghcr.io/devcontainers/features/common-utils"
+    ],
+    "mounts": [
+        {
+            "source": "${localEnv:HOME}/.gemini",
+            "target": "/var/tmp/.gemini",
+            "type": "bind"
+        }
+    ],
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "Google.gemini-cli-vscode-ide-companion"
+            ]
+        }
+    }
+}
