@@ -7,8 +7,28 @@ if [ "$(id -u)" -ne 0 ]; then
     exit 1
 fi
 
-ln -s "/var/tmp/.gemini" "${_REMOTE_USER_HOME}/.gemini"
-chown -h ${_REMOTE_USER}:${_REMOTE_USER} "${_REMOTE_USER_HOME}/.gemini"
+# Selective symlink from the host's mount point to the container's .gemini directory
+# This avoids sharing architecture-dependent binaries (like those in ~/.gemini/tmp/bin)
+HOST_GEMINI_DIR="/var/tmp/.gemini"
+
+# Ensure we have the remote user's home directory
+if [ -z "${_REMOTE_USER_HOME}" ]; then
+    _REMOTE_USER_HOME=$(getent passwd "${_REMOTE_USER:-root}" | cut -d: -f6)
+fi
+CONTAINER_GEMINI_DIR="${_REMOTE_USER_HOME}/.gemini"
+
+mkdir -p "${CONTAINER_GEMINI_DIR}"
+
+# List of items to share between host and container
+SHARE_ITEMS="settings.json GEMINI.md skills extensions trusted-folders.json"
+
+for item in ${SHARE_ITEMS}; do
+    # Create symlinks even if the source doesn't exist during build, 
+    # as the mount will be available at runtime.
+    ln -sf "${HOST_GEMINI_DIR}/${item}" "${CONTAINER_GEMINI_DIR}/${item}"
+done
+
+chown -R -h ${_REMOTE_USER:-root}:${_REMOTE_USER:-root} "${CONTAINER_GEMINI_DIR}"
 
 # Fetch the latest Node.js LTS version dynamically to ensure we always install an up-to-date and supported runtime.
 TARGET_NODE_VER=$(curl -s https://nodejs.org/dist/index.json | jq -r '[.[] | select(.lts != false)] | .[0].version')
@@ -35,10 +55,10 @@ node -v || { echo "Error: Node.js installation failed"; exit 1; }
 npm -v || { echo "Error: npm installation failed"; exit 1; }
 
 # Upgrade npm to >= 11.10 to support --min-release-age flag correctly.
-npm install -g npm@latest
+npm install -g npm@latest --ignore-scripts=true
 
 # Enforce an artificial delay (--min-release-age) to mitigate supply-chain attacks via compromised rapid updates.
-npm install -g @google/gemini-cli --min-release-age=7
+npm install -g @google/gemini-cli --min-release-age=7 --ignore-scripts=true
 
 # Expose the installed Gemini CLI globally.
 ln -sf /usr/local/lib/nodejs/bin/gemini /usr/local/bin/gemini
