@@ -50,10 +50,10 @@ node -v || { echo "Error: Node.js installation failed"; exit 1; }
 npm -v || { echo "Error: npm installation failed"; exit 1; }
 
 # Upgrade npm to >= 11.10 to support --min-release-age flag correctly.
-npm install -g npm@latest
+npm install -g npm@latest --ignore-scripts=true
 
 # Enforce an artificial delay (--min-release-age) to mitigate supply-chain attacks via compromised rapid updates.
-npm install -g @google/gemini-cli --min-release-age=7
+npm install -g @google/gemini-cli --min-release-age=7 --ignore-scripts=true
 
 # Expose the installed Gemini CLI globally.
 ln -sf /usr/local/lib/nodejs/bin/gemini /usr/local/bin/gemini
