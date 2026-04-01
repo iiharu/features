@@ -13,9 +13,11 @@ check "npx is available" npx -v
 # To avoid side effects (file creation/rename errors) in mounted .gemini directory
 # check "gemini is available" gemini --version
 check "gemini is in path" command -v gemini
-check ".gemini is mounted" test -d /var/tmp/.gemini
-check ".gemini is link" test -h $HOME/.gemini
-check ".gemini is linked" test "$(readlink $HOME/.gemini)" == "/var/tmp/.gemini"
+check ".gemini host mount exists" test -d /var/tmp/.gemini
+check ".gemini is directory" test -d $HOME/.gemini
+check ".gemini is not a link" test ! -h $HOME/.gemini
+check "GEMINI.md is linked" test -h $HOME/.gemini/GEMINI.md
+check "GEMINI.md link target is correct" test "$(readlink $HOME/.gemini/GEMINI.md)" == "/var/tmp/.gemini/GEMINI.md"
 
 # Report results
 # If any of the checks above exited with a non-zero exit code, the test will fail.
