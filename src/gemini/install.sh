@@ -17,7 +17,6 @@ if [ -z "${_REMOTE_USER_HOME}" ]; then
 fi
 CONTAINER_GEMINI_DIR="${_REMOTE_USER_HOME}/.gemini"
 
-echo "Creating .gemini directory at ${CONTAINER_GEMINI_DIR}"
 mkdir -p "${CONTAINER_GEMINI_DIR}"
 
 # List of items to share between host and container
