@@ -10,8 +10,14 @@ fi
 # Selective symlink from the host's mount point to the container's .gemini directory
 # This avoids sharing architecture-dependent binaries (like those in ~/.gemini/tmp/bin)
 HOST_GEMINI_DIR="/var/tmp/.gemini"
+
+# Ensure we have the remote user's home directory
+if [ -z "${_REMOTE_USER_HOME}" ]; then
+    _REMOTE_USER_HOME=$(getent passwd "${_REMOTE_USER:-root}" | cut -d: -f6)
+fi
 CONTAINER_GEMINI_DIR="${_REMOTE_USER_HOME}/.gemini"
 
+echo "Creating .gemini directory at ${CONTAINER_GEMINI_DIR}"
 mkdir -p "${CONTAINER_GEMINI_DIR}"
 
 # List of items to share between host and container
@@ -19,11 +25,12 @@ SHARE_ITEMS="settings.json GEMINI.md skills extensions trusted-folders.json"
 
 for item in ${SHARE_ITEMS}; do
     if [ -e "${HOST_GEMINI_DIR}/${item}" ]; then
+        echo "Linking ${item} from ${HOST_GEMINI_DIR}"
         ln -sf "${HOST_GEMINI_DIR}/${item}" "${CONTAINER_GEMINI_DIR}/${item}"
     fi
 done
 
-chown -R -h ${_REMOTE_USER}:${_REMOTE_USER} "${CONTAINER_GEMINI_DIR}"
+chown -R -h ${_REMOTE_USER:-root}:${_REMOTE_USER:-root} "${CONTAINER_GEMINI_DIR}"
 
 # Fetch the latest Node.js LTS version dynamically to ensure we always install an up-to-date and supported runtime.
 TARGET_NODE_VER=$(curl -s https://nodejs.org/dist/index.json | jq -r '[.[] | select(.lts != false)] | .[0].version')

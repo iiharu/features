@@ -14,6 +14,11 @@ check "npx is available" npx -v
 # check "gemini is available" gemini --version
 check "gemini is in path" command -v gemini
 check ".gemini host mount exists" test -d /var/tmp/.gemini
+
+# Debugging: show contents of mount point
+echo "Contents of /var/tmp/.gemini:"
+ls -la /var/tmp/.gemini || echo "/var/tmp/.gemini listing failed"
+
 check ".gemini is directory" test -d $HOME/.gemini
 check ".gemini is not a link" test ! -h $HOME/.gemini
 check "GEMINI.md is linked" test -h $HOME/.gemini/GEMINI.md
