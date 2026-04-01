@@ -24,10 +24,9 @@ mkdir -p "${CONTAINER_GEMINI_DIR}"
 SHARE_ITEMS="settings.json GEMINI.md skills extensions trusted-folders.json"
 
 for item in ${SHARE_ITEMS}; do
-    if [ -e "${HOST_GEMINI_DIR}/${item}" ]; then
-        echo "Linking ${item} from ${HOST_GEMINI_DIR}"
-        ln -sf "${HOST_GEMINI_DIR}/${item}" "${CONTAINER_GEMINI_DIR}/${item}"
-    fi
+    # Create symlinks even if the source doesn't exist during build, 
+    # as the mount will be available at runtime.
+    ln -sf "${HOST_GEMINI_DIR}/${item}" "${CONTAINER_GEMINI_DIR}/${item}"
 done
 
 chown -R -h ${_REMOTE_USER:-root}:${_REMOTE_USER:-root} "${CONTAINER_GEMINI_DIR}"
