@@ -1,7 +1,7 @@
 {
     "name": "Gemini",
     "id": "gemini",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "description": "Install Gemini CLI and configure its environment",
     "options": {},
     "installsAfter": [
