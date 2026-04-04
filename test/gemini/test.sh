@@ -16,6 +16,8 @@ check ".gemini is directory" test -d $HOME/.gemini
 check ".gemini is not a link" test ! -h $HOME/.gemini
 check "GEMINI.md is linked" test -h $HOME/.gemini/GEMINI.md
 check "GEMINI.md link target is correct" test "$(readlink $HOME/.gemini/GEMINI.md)" == "/var/tmp/.gemini/GEMINI.md"
+check ".env is linked" test -h $HOME/.gemini/.env
+check ".env link target is correct" test "$(readlink $HOME/.gemini/.env)" == "/var/tmp/.gemini/.env"
 
 # Report results
 reportResults

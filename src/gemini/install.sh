@@ -20,7 +20,7 @@ CONTAINER_GEMINI_DIR="${_REMOTE_USER_HOME}/.gemini"
 mkdir -p "${CONTAINER_GEMINI_DIR}"
 
 # List of items to share between host and container
-SHARE_ITEMS="settings.json GEMINI.md skills extensions trusted-folders.json"
+SHARE_ITEMS="settings.json GEMINI.md skills extensions trusted-folders.json .env"
 
 for item in ${SHARE_ITEMS}; do
     # Create symlinks even if the source doesn't exist during build, 
