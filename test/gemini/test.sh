@@ -19,5 +19,7 @@ check "GEMINI.md link target is correct" test "$(readlink $HOME/.gemini/GEMINI.m
 check ".env is linked" test -h $HOME/.gemini/.env
 check ".env link target is correct" test "$(readlink $HOME/.gemini/.env)" == "/var/tmp/.gemini/.env"
 
+check "GEMINI_TELEMETRY_OTLP_ENDPOINT is set" [ "$GEMINI_TELEMETRY_OTLP_ENDPOINT" = "http://host.docker.internal:4318" ]
+
 # Report results
 reportResults
