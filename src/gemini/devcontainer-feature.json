@@ -1,7 +1,7 @@
 {
     "name": "Gemini",
     "id": "gemini",
-    "version": "0.0.5",
+    "version": "0.0.3",
     "description": "Install Gemini CLI and configure its environment",
     "options": {},
     "installsAfter": [
@@ -20,8 +20,5 @@
                 "Google.gemini-cli-vscode-ide-companion"
             ]
         }
-    },
-    "containerEnv": {
-        "GEMINI_TELEMETRY_OTLP_ENDPOINT": "http://host.docker.internal:4317"
     }
 }
