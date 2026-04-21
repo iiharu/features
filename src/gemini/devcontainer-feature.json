@@ -1,7 +1,7 @@
 {
     "name": "Gemini",
     "id": "gemini",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "description": "Install Gemini CLI and configure its environment",
     "options": {},
     "installsAfter": [
@@ -22,6 +22,6 @@
         }
     },
     "containerEnv": {
-        "GEMINI_TELEMETRY_OTLP_ENDPOINT": "http://host.docker.internal:4318"
+        "GEMINI_TELEMETRY_OTLP_ENDPOINT": "http://host.docker.internal:4317"
     }
 }
