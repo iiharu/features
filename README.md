@@ -2,6 +2,19 @@
 
 ## Contents
 
+### `codex`
+
+Install OpenAI Codex CLI.
+
+```jsonc
+{
+    "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+    "features": {
+        "ghcr.io/iiharu/features/codex:0": {}
+    }
+}
+```
+
 ### `gemini`
 
 Install Gemini CLI and configure its environment.
@@ -71,6 +84,7 @@ By default, each Feature will be prefixed with the `<owner/<repo>` namespace.  F
 ```
 ghcr.io/iiharu/features/gemini:0
 ghcr.io/iiharu/features/antigravity:0
+ghcr.io/iiharu/features/codex:0
 ```
 
 The provided GitHub Action will also publish a third "metadata" package with just the namespace, eg: `ghcr.io/iiharu/features`.  This contains information useful for tools aiding in Feature discovery.
