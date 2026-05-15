@@ -15,6 +15,7 @@ jobs:
         features:
           - gemini
           - antigravity
+          - codex
         baseImage:
           - mcr.microsoft.com/devcontainers/base:ubuntu
           - mcr.microsoft.com/devcontainers/base:debian
@@ -35,6 +36,7 @@ jobs:
         features:
           - gemini
           - antigravity
+          - codex
     steps:
       - uses: actions/checkout@v4
 
