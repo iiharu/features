@@ -1,10 +1,17 @@
 {
     "name": "Codex",
     "id": "codex",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "Install OpenAI Codex CLI",
     "options": {},
     "installsAfter": [
         "ghcr.io/devcontainers/features/common-utils"
+    ],
+    "mounts": [
+        {
+            "source": "/etc/codex/config.toml",
+            "target": "/etc/codex/config.toml",
+            "type": "bind"
+        }
     ]
 }
