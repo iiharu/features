@@ -10,6 +10,15 @@ fi
 mkdir -p /etc/codex
 touch /etc/codex/config.toml
 
+CODEX_HOME_DIR="/var/tmp/codex"
+CODEX_USER="${_REMOTE_USER:-root}"
+
+mkdir -p "${CODEX_HOME_DIR}"
+if id -u "${CODEX_USER}" >/dev/null 2>&1; then
+    chown "${CODEX_USER}" "${CODEX_HOME_DIR}"
+fi
+chmod 0700 "${CODEX_HOME_DIR}"
+
 ARCH="$(uname -m)"
 case "${ARCH}" in
     x86_64)
