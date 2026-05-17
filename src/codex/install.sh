@@ -7,6 +7,9 @@ if [ "$(id -u)" -ne 0 ]; then
     exit 1
 fi
 
+mkdir -p /etc/codex
+touch /etc/codex/config.toml
+
 ARCH="$(uname -m)"
 case "${ARCH}" in
     x86_64)
