@@ -1,13 +1,21 @@
 {
     "name": "Codex",
     "id": "codex",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "description": "Install OpenAI Codex CLI",
     "options": {},
+    "containerEnv": {
+        "CODEX_HOME": "/home/vscode/.codex"
+    },
     "installsAfter": [
         "ghcr.io/devcontainers/features/common-utils"
     ],
     "mounts": [
+        {
+            "source": "codex-home-${devcontainerId}",
+            "target": "/home/vscode/.codex",
+            "type": "volume"
+        },
         {
             "source": "/etc/codex/config.toml",
             "target": "/etc/codex/config.toml",
