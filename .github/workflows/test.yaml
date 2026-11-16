@@ -67,8 +67,6 @@ jobs:
             user: vscode
           - image: mcr.microsoft.com/devcontainers/base:debian
             user: vscode
-          - image: mcr.microsoft.com/devcontainers/javascript-node:1-20-bookworm
-            user: node
     steps:
       - uses: actions/checkout@v4
 
