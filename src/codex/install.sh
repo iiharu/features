@@ -24,33 +24,3 @@ fi
 CODEX_GROUP="$(id -gn "${CODEX_USER}")"
 chown "${CODEX_USER}:${CODEX_GROUP}" "${CODEX_HOME_DIR}"
 chmod 0700 "${CODEX_HOME_DIR}"
-
-ARCH="$(uname -m)"
-case "${ARCH}" in
-    x86_64)
-        TARGET="x86_64-unknown-linux-musl"
-        ;;
-    aarch64|arm64)
-        TARGET="aarch64-unknown-linux-musl"
-        ;;
-    *)
-        echo "Unsupported architecture: ${ARCH}"
-        exit 1
-        ;;
-esac
-
-CODEX_TAR="codex-${TARGET}.tar.gz"
-CODEX_BIN="codex-${TARGET}"
-CODEX_URL="https://github.com/openai/codex/releases/latest/download/${CODEX_TAR}"
-TMP_DIR="$(mktemp -d)"
-
-cleanup() {
-    rm -rf "${TMP_DIR}"
-}
-trap cleanup EXIT INT TERM
-
-curl -fsSL "${CODEX_URL}" -o "${TMP_DIR}/${CODEX_TAR}"
-tar -xzf "${TMP_DIR}/${CODEX_TAR}" -C "${TMP_DIR}"
-install -m 0755 "${TMP_DIR}/${CODEX_BIN}" /usr/local/bin/codex
-
-codex --version
