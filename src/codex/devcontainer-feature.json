@@ -1,7 +1,7 @@
 {
     "name": "Codex",
     "id": "codex",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "description": "Install OpenAI Codex CLI",
     "options": {},
     "containerEnv": {
@@ -21,5 +21,6 @@
             "target": "/etc/codex/config.toml",
             "type": "bind"
         }
-    ]
+    ],
+    "postCreateCommand": "installer=$(curl -fsSL https://chatgpt.com/codex/install.sh) && CODEX_NON_INTERACTIVE=1 sh -c \"$installer\""
 }

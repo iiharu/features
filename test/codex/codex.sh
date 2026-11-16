@@ -2,10 +2,15 @@
 
 set -e
 
+# features test skips lifecycle hooks; install explicitly for these checks.
+installer=$(curl -fsSL https://chatgpt.com/codex/install.sh)
+CODEX_NON_INTERACTIVE=1 sh -c "$installer"
 source dev-container-features-test-lib
 
 check "codex is in path" command -v codex
 check "codex reports version" codex --version
+check "codex is user-installed" test "$(command -v codex)" = "$HOME/.local/bin/codex"
+check "standalone package is writable" test -w "$CODEX_HOME/packages/standalone"
 check "codex config is mounted" test -f /etc/codex/config.toml
 check "codex config is readable" grep -q . /etc/codex/config.toml
 check "CODEX_HOME is configured" test "${CODEX_HOME}" = "/home/vscode/.codex"
